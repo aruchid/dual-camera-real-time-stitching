@@ -15,3 +15,9 @@
 本仓库由 PPstation 作品集建立，当前仅包含项目简介，尚未迁入实现代码、硬件设计、数据或验证结果。
 
 网站项目路径：`/projects/dual-camera-real-time-stitching`
+
+## 已实现的重叠融合基线
+
+`src/blend.py` 提供 `blend(left, right, overlap)`，输入已对齐的二维灰度或三维通道末置数组及已知水平重叠像素数，输出浮点融合图。输出宽度为两图宽度之和减去重叠数。融合使用线性内插，保留重叠两端相机的贡献，避免 uint8 加法溢出。
+
+安装依赖后执行 `python -m unittest discover -s tests -v`。测试覆盖输出尺寸、已知像素融合、彩色输入和参数拒绝。相机同步、几何配准及实时采集仍待接入。
